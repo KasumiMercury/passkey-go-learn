@@ -6,8 +6,9 @@ import (
 )
 
 var (
-	WebAuthn *webauthn.WebAuthn
-	err      error
+	Datastore = NewStore()
+	WebAuthn  *webauthn.WebAuthn
+	err       error
 )
 
 func main() {
