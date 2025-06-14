@@ -9,11 +9,13 @@ func BeginRegistration(w http.ResponseWriter, r *http.Request) {
 	user := Datastore.GetUser()
 
 	// TODO: session store
-	options, _, err := WebAuthn.BeginRegistration(user)
+	options, session, err := WebAuthn.BeginRegistration(user)
 	if err != nil {
 		http.Error(w, "Failed to begin registration: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	Datastore.SaveSession(session)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
