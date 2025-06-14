@@ -1,10 +1,13 @@
 package main
 
-import "github.com/go-webauthn/webauthn/webauthn"
+import (
+	"github.com/go-webauthn/webauthn/webauthn"
+	"github.com/google/uuid"
+)
 
 type Store struct {
 	user    *User
-	session *webauthn.SessionData
+	session map[uuid.UUID]*webauthn.SessionData
 }
 
 func NewStore() *Store {
@@ -20,9 +23,18 @@ func (s *Store) SaveUser(user *User) {
 }
 
 func (s *Store) GetSession() *webauthn.SessionData {
-	return s.session
+	// TODO: implement
+	testId, err := uuid.NewV7()
+	if err != nil {
+		panic(err)
+	}
+	return s.session[testId]
 }
 
 func (s *Store) SaveSession(session *webauthn.SessionData) {
-	s.session = session
+	id, err := uuid.NewV7()
+	if err != nil {
+		panic(err)
+	}
+	s.session[id] = session
 }
