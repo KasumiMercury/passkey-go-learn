@@ -2,26 +2,27 @@ package main
 
 import "github.com/go-webauthn/webauthn/webauthn"
 
-type Store struct{}
+type Store struct {
+	user    *User
+	session *webauthn.SessionData
+}
 
 func NewStore() *Store {
 	return &Store{}
 }
 
 func (s *Store) GetUser() *User {
-	// TODO: implement
-	return nil
+	return s.user
 }
 
 func (s *Store) SaveUser(user *User) {
-	// TODO: implement
+	s.user = user
 }
 
 func (s *Store) GetSession() *webauthn.SessionData {
-	// TODO: implement
-	return nil
+	return s.session
 }
 
 func (s *Store) SaveSession(session *webauthn.SessionData) {
-	// TODO: implement
+	s.session = session
 }
